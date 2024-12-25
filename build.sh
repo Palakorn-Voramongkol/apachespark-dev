@@ -1,6 +1,7 @@
-SPARK_VERSION="2.4.5"
-HADOOP_VERSION="2.7"
-JUPYTERLAB_VERSION="2.1.5"
+SPARK_VERSION="3.4.3"
+HADOOP_VERSION="3"
+JUPYTERLAB_VERSION="4.2.4"
+PGADMIN_VERSION="7.2"
 
 # -- Building the Images
 
@@ -28,7 +29,15 @@ docker build \
   -f jupyterlab.Dockerfile \
   -t jupyterlab .
 
-# Local copy of Notebooks and job-submit scripts outside Git change tracking
-mkdir -p ./local/notebooks
-cp -R ./notebooks/* ./local/notebooks
+docker build \
+  -f postgres.Dockerfile \
+  -t postgres16 .
 
+docker build \
+  --build-arg pgadmin_version="${PGADMIN_VERSION}" \
+  -f pgadmin.Dockerfile \
+  -t pgadmin4 .
+
+#docker build \
+#  -f cassandra.Dockerfile \
+#  -t cassandra .

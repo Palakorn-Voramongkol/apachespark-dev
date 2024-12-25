@@ -1,6 +1,6 @@
 FROM spark-base
 
-RUN apt-get update && apt-get install -y vim && apt-get install -y net-tools && apt-get install -y iputils-ping
+RUN apt update && apt install -y vim && apt install -y net-tools && apt install -y iputils-ping
 
 # -- Runtime
 ARG spark_master_web_ui=8080
